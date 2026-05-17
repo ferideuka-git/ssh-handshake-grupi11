@@ -42,3 +42,33 @@ def verify_signature(public_pem, signature, data):
         return True
        except InvalidSignature:
         return False
+
+
+
+    # ================= Diffie-Hellman (X25519) =================
+def generate_dh_keypair():
+    private_key = x25519.X25519PrivateKey.generate()
+    public_key = private_key.public_key()
+    return private_key, public_key
+
+def derive_shared_key(private_key, peer_public_bytes):
+    peer_public = x25519.X25519PublicKey.from_public_bytes(peer_public_bytes)
+    return private_key.exchange(peer_public)
+
+# ================= AES-256 CFB Enkriptimi =================
+def aes_encrypt(key, plaintext, iv):
+    cipher = Cipher(algorithms.AES(key[:32]), modes.CFB(iv))
+    encryptor = cipher.encryptor()
+    return encryptor.update(plaintext) + encryptor.finalize()
+
+def aes_decrypt(key, ciphertext, iv):
+    cipher = Cipher(algorithms.AES(key[:32]), modes.CFB(iv))
+    decryptor = cipher.decryptor()
+    return decryptor.update(ciphertext) + decryptor.finalize()
+
+# ================= HMAC SHA256 =================
+def create_hmac(key, data):
+    return hmac.new(key, data, hashlib.sha256).digest()
+
+def verify_hmac(key, data, mac):
+    return hmac.compare_digest(create_hmac(key, data), mac)
