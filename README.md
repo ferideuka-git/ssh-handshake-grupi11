@@ -122,9 +122,34 @@ Ruhet automatikisht nga klienti gjatë lidhjes së parë dhe përmban çelësin 
 - Verifikon identitetin e serverit gjatë handshake-ut
 - Zbulon ndryshimet e dyshimta të host key
 - Mbron kundër sulmeve Man-in-the-middle attack (MITM)
-- Nëse public key i serverit ndryshon papritur, klienti shfaq paralajmërim sigurie dhe ndërpret lidhjen për të parandaluar komunikimin me një server potencialisht të rre
+- Nëse public key i serverit ndryshon papritur, klienti shfaq paralajmërim sigurie dhe ndërpret lidhjen për të parandaluar komunikimin me një server potencialisht të rrezikshem
+
+
+## Masat e Sigurisë
+
+| Kërcënimi | Mbrojtja |
+|-----------|---------|
+| Man-in-the-Middle (MITM) | Krahasimi i `known_hosts.txt` + verifikimi i nënshkrimit RSA |
+| Përgjimi i të dhënave | Enkriptimi AES-256-CFB pas handshake-it |
+| Manipulimi i mesazheve | HMAC-SHA256 me `hmac.compare_digest` (kohë konstante) |
+| Çelësa të dobët / Replay | X25519 — çift i ri çelësash për çdo sesion |
+| Autentifikim i dobët i serverit | RSA-2048 me mbushje PSS |
+
+
+## Trajtimi i Gabimeve
+
+| Skenari | Sjellja |
+|---------|---------|
+| Serveri nuk është duke punuar | Klienti logon `Connection refused` dhe mbyllet |
+| MITM i zbuluar | Paralajmërim i qartë + ndërprerje e lidhjes |
+| Nënshkrim invalid | Klienti logon gabimin dhe mbyll lidhjen |
+| Dështim HMAC | Serveri refuzon mesazhin |
+| Gabim i papritur | `finally` mbyll socket-in pastër në të dyja palët |
 
 ---
+
+
+
 
 ## Kërkesat dhe Instalimi
 
@@ -298,22 +323,6 @@ Lidhja ndërpritet automatikisht.
 
 ---
 
-## Shpjegimi i SSH Handshake — Hap pas Hapi
-
-### Hapi 1: Negocimi i Algoritmeve
-Klienti dërgon një propozim JSON me algoritmet që mbështet. Serveri zgjedh dhe konfirmon. Kjo siguron dakordësi para çdo operacioni kriptografik.
-
-### Hapi 2: Shkëmbimi i Çelësave — Diffie-Hellman (X25519)
-Të dyja palët gjenerojnë çift çelësash X25519 dhe shkëmbejnë çelësat publikë. Secila palë llogarit sekretin e përbashkët duke përdorur çelësin e vet privat + çelësin publik të tjetrit. Sekreti **nuk transmetohet** kurrë nëpër rrjet — ofron **Perfect Forward Secrecy**.
-
-### Hapi 3: Autentifikimi i Serverit (Nënshkrimi Dixhital + MITM)
-Serveri nënshkruan çelësin e përbashkët me RSA-2048 (PSS + SHA-256) dhe dërgon çelësin publik + nënshkrimin. Klienti verifikon nënshkrimin dhe kontrollon `known_hosts.txt` kundër sulmeve MITM.
-
-### Hapi 4: Komunikimi i Enkriptuar (AES-256-CFB + HMAC-SHA256)
-Klienti enkipton mesazhin me AES-256-CFB dhe llogarit HMAC-SHA256. Serveri verifikon HMAC-un (integritetin) pastaj dekipton mesazhin.
-
----
-
 ## Masat e Sigurisë
 
 | Kërcënimi | Mbrojtja |
@@ -338,9 +347,4 @@ Klienti enkipton mesazhin me AES-256-CFB dhe llogarit HMAC-SHA256. Serveri verif
 
 ---
 
-## Skedarët e Gjeneruar Automatikisht
 
-| Skedari | Përshkrimi |
-|---------|-----------|
-| `known_hosts.txt` | Ruan çelësin publik RSA të serverit pas lidhjes së parë. Parandalon MITM. |
-| `__pycache__/` | Bytecode i kompajluar nga Python. Nuk ngarkohet në Git (shih `.gitignore`). |
