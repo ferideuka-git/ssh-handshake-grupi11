@@ -7,7 +7,7 @@ Qëllimi i këtij projekti është të ofrojë një përshkrim teorik dhe prakti
 Programi i lejon përdoruesit të iniciojë një lidhje të sigurt ndërmjet klientit dhe serverit, duke demonstruar në praktikë të gjitha fazat kryesore të krijimit të një sesioni të sigurt SSH.
 
 
-## Përshkrimi i Algoritmit  SSH Handshake 
+Përshkrimi i Algoritmit  SSH Handshake 
 ------------------------------------------------------------------------------------------------------
 SSH Handshake është procesi përmes të cilit klienti dhe serveri krijojnë një kanal të sigurt komunikimi para shkëmbimit të të dhënave. Gjatë këtij procesi realizohen negocimi i algoritmeve, shkëmbimi i çelësave, autentifikimi i serverit dhe aktivizimi i komunikimit të enkriptuar.
 
