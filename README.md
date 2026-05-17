@@ -60,6 +60,16 @@ Moduli qendror që ofron të gjitha operacionet kriptografike:
 | `create_hmac()`     | Krijon HMAC-SHA256 për verifikim integriteti                     |
 | `verify_hmac()`     | Verifikon HMAC me krahasim në kohë konstante (anti-timing attack) |
 
+
+### `known_hosts.tx` — Verifikimi i Identitetit të Serverit
+Ruhet automatikisht nga klienti gjatë lidhjes së parë dhe përmban çelësin publik të serverit SSH.
+
+- Ruan public key të serverit për lidhje të ardhshme
+- Verifikon identitetin e serverit gjatë handshake-ut
+- Zbulon ndryshimet e dyshimta të host key
+- Mbron kundër sulmeve Man-in-the-middle attack (MITM)
+- Nëse public key i serverit ndryshon papritur, klienti shfaq paralajmërim sigurie dhe ndërpret lidhjen për të parandaluar komunikimin me një server potencialisht të rre
+
 ---
 
 ## Kërkesat dhe Instalimi
