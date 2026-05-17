@@ -207,7 +207,7 @@ Struktura e Projektit
 ------------------------------------------------------------------------------------------------------
 
 ```
-SiguriTeDhenave_Projekti2_Grupi11/
+ssh-handshake-grupi11.git/
 │
 ├── server.py          
 ├── client.py          
