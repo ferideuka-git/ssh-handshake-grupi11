@@ -6,7 +6,66 @@ Ky projekt përfshin implementimin e një versioni të thjeshtuar të Secure She
 Qëllimi i këtij projekti është të ofrojë një përshkrim teorik dhe praktik të mënyrës se si funksionon procesi i SSH Handshake, duke përfshirë fazat kryesore si negocimi i algoritmeve, shkëmbimi i çelësave kriptografikë, autentikimi i serverit dhe krijimi i një kanali të sigurt komunikimi.
 Programi i lejon përdoruesit të iniciojë një lidhje të sigurt ndërmjet klientit dhe serverit, duke demonstruar në praktikë të gjitha fazat kryesore të krijimit të një sesioni të sigurt SSH.
 
----
+
+## Përshkrimi i Algoritmit  SSH Handshake 
+------------------------------------------------------------------------------------------------------
+SSH Handshake është procesi përmes të cilit klienti dhe serveri krijojnë një kanal të sigurt komunikimi para shkëmbimit të të dhënave. Gjatë këtij procesi realizohen negocimi i algoritmeve, shkëmbimi i çelësave, autentifikimi i serverit dhe aktivizimi i komunikimit të enkriptuar.
+
+### Hapi 1: Negocimi i Algoritmeve
+Klienti fillimisht dërgon një listë me algoritmet që mbështet për:
+- key exchange,
+- encryption,
+- HMAC.
+
+Serveri zgjedh algoritmet e përbashkëta dhe i konfirmon klientit.  
+Ky hap siguron kompatibilitet dhe dakordësi për mekanizmat kriptografikë që do të përdoren gjatë sesionit.
+
+### Hapi 2: Shkëmbimi i Çelësave — X25519 Diffie-Hellman
+Klienti dhe serveri gjenerojnë çift çelësash X25519:
+- private key,
+- public key.
+
+Pastaj shkëmbejnë çelësat publikë dhe secila palë llogarit një shared secret duke përdorur:
+- çelësin privat të vet,
+- dhe public key të palës tjetër.
+
+Sekreti i përbashkët nuk transmetohet kurrë në rrjet, gjë që e bën komunikimin më të sigurt dhe ofron Perfect Forward Secrecy.
+
+### Hapi 3: Derivimi i Session Key
+Nga shared secret krijohet session key duke përdorur HKDF me SHA-256.
+
+Ky session key përdoret për:
+- enkriptimin simetrik,
+- gjenerimin e HMAC,
+- mbrojtjen e komunikimit gjatë sesionit.
+
+### Hapi 4: Autentifikimi i Serverit
+Serveri nënshkruan session key me RSA-2048 Digital Signature dhe ia dërgon klientit së bashku me public key.
+
+Klienti:
+- verifikon nënshkrimin,
+- kontrollon public key në `known_hosts.txt`,
+- dhe sigurohet që serveri është autentik.
+
+Ky mekanizëm mbron kundër sulmeve MITM (Man-in-the-Middle).
+
+### Hapi 5: Aktivizimi i Kanalit të Enkriptuar
+Pas përfundimit të handshake-ut krijohet kanali i sigurt i komunikimit.
+
+Klienti:
+- enkripton mesazhin me AES-256-CFB,
+- krijon HMAC-SHA256 për integritetin e të dhënave,
+- dhe e dërgon mesazhin te serveri.
+
+Serveri:
+- verifikon HMAC-un,
+- dekripton mesazhin,
+- dhe pranon komunikimin e sigurt.
+
+Ky proces garanton:
+- konfidencialitetin,
+- integritetin,
+- dhe autentifikimin gjatë komunikimit SSH.
 
 ## Struktura e Projektit
 
