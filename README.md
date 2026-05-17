@@ -22,8 +22,8 @@ projekti3Arbena/
 ```
 
 ---
-
-## Përshkrimi i Pjesëve të Implementuara
+Komponentët Kryesor
+------------------------------------------------------------------------------------------------------
 
 ### `server.py` — Serveri SSH
 Simulon sjelljen e një serveri SSH gjatë fazës së handshake-ut. Detyrat kryesore:
