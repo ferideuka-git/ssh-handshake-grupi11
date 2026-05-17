@@ -67,20 +67,6 @@ Ky proces garanton:
 - integritetin,
 - dhe autentifikimin gjatë komunikimit SSH.
 
-## Struktura e Projektit
-
-```
-projekti3Arbena/
-│
-├── server.py          # Serveri SSH — menaxhon handshake-in dhe kanalin e sigurt
-├── client.py          # Klienti SSH — inicializon lidhjen dhe handshake-in
-├── crypto_utils.py    # Funksionet kriptografike (RSA, DH, AES, HMAC)
-├── known_hosts.txt    # Krijohet automatikisht: ruan çelësin publik të serverit
-├── .gitignore         # Skedarët që nuk ngarkohen në Git
-└── README.md          # Ky skedar
-```
-
----
 Komponentët Kryesor
 ------------------------------------------------------------------------------------------------------
 
@@ -215,6 +201,21 @@ Server host key has changed!
 ```
 
 Lidhja ndërpritet automatikisht.
+
+
+Struktura e Projektit
+------------------------------------------------------------------------------------------------------
+
+```
+SiguriTeDhenave_Projekti2_Grupi11/
+│
+├── server.py          
+├── client.py          
+├── crypto_utils.py   
+├── known_hosts.txt    
+├── .gitignore        
+└── README.md          
+```
 
 Si të Ekzekutohet Projekti
 ------------------------------------------------------------------------------------------------------
