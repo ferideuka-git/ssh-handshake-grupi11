@@ -219,9 +219,11 @@ Lidhja ndërpritet automatikisht.
 Si të Ekzekutohet Projekti
 ------------------------------------------------------------------------------------------------------
 1.	Klono repository-n:
- 	git clone https://github.com/FinesaMaxhuni/SiguriTeDhenave_Projekti2_Grupi11.git
+ 	git clone  https://github.com/ferideuka-git/ssh-handshake-grupi11.git
 2.	Hape folderin e projektit ne PyCharm (Cfarëdo editori që përkrah gjuhën programuese Python)
-3.	Zgjedh file-in e algoritmit që dëshironi dhe ekzekutojeni atë
+3.	Instalo librarin cryptography: pip install cryptography
+4.	Ekzekuto serverin : python server.py
+5.	Ekzekuto klientin: python client.py
 
 
 
@@ -229,104 +231,7 @@ Si të Ekzekutohet Projekti
 
 
 
-## Kërkesat dhe Instalimi
 
-### Parakushtet
-- **Python 3.8** ose më i ri
-- **pip** (menaxheri i paketave të Python)
-
-### Hapi 1 — Klono ose shkarko projektin
-
-```bash
-git clone https://github.com/username/projekti3Arbena.git
-cd projekti3Arbena
-```
-
-ose shkarko dhe shpaketoje si ZIP, pastaj navigo në dosjen e projektit:
-
-```bash
-cd C:\Users\Lenovo\Desktop\projekti3Arbena
-```
-
-### Hapi 2 — Instalo varësitë
-
-```bash
-pip install cryptography
-```
-
-Verifiko instalimin:
-
-```bash
-python -c "import cryptography; print(cryptography.__version__)"
-```
-
-Duhet të shfaqet numri i versionit, p.sh. `48.0.0`.
-
----
-
-## Udhëzime të Hollësishme për Ekzekutim
-
-> ⚠️ **Kujdes:** Serveri duhet të jetë **i startuar dhe duke pritur** para se të ekzekutohet klienti.
-
----
-
-### Hapi 1 — Hap dy dritare terminali
-
-**Windows (PowerShell ose CMD):**
-- Shtyp `Windows + R`, shkruaj `cmd`, shtyp Enter — bëje dy herë
-
-**macOS / Linux:**
-- Hap dy tab të reja në terminalin tënd
-
----
-
-### Hapi 2 — Navigo në dosjen e projektit (në të dyja terminalet)
-
-```bash
-cd C:\Users\Lenovo\Desktop\projekti3Arbena
-```
-
----
-
-### Hapi 3 — Ekzekuto serverin (Terminali 1)
-
-```bash
-python server.py
-```
-
-**Output-i i pritur:**
-```
-==================================================
-Server starting up...
-==================================================
-[SERVER] 2026-05-17 13:24:15,212 - INFO - RSA Host Keys generated successfully.
-Awaiting client connections...
-```
-
-✅ Prit derisa të shfaqet `Awaiting client connections...` — serveri është gati.
-
----
-
-### Hapi 4 — Ekzekuto klientin (Terminali 2)
-
-```bash
-python client.py
-```
-
-**Output-i i pritur:**
-```
-==================================================
-Welcome to Simplified SSH Client.
-==================================================
-Attempting to connect to the SSH server...
-Starting handshake protocol...
-```
-
----
-
-### Hapi 5 — Vëzhgo ekzekutimin e plotë
-
-Pas ekzekutimit të klientit, handshake-i kryhet automatikisht. Shiko të dyja terminalet njëkohësisht.
 
 
 
