@@ -40,3 +40,5 @@ def verify_signature(public_pem, signature, data):
             hashes.SHA256()
         )
         return True
+       except InvalidSignature:
+        return False
