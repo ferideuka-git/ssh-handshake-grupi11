@@ -1,17 +1,15 @@
 # ssh-handshake-grupi11
+Përshkrimi i Projektit
+------------------------------------------------------------------------------------------------------
+Ky projekt përfshin implementimin e një versioni të thjeshtuar të Secure Shell Protocol Handshake në një model Client-Server duke përdorur gjuhën programuese Python.
 
+Qëllimi i këtij projekti është të ofrojë një përshkrim teorik dhe praktik të mënyrës se si funksionon procesi i SSH Handshake, duke përfshirë fazat kryesore si negocimi i algoritmeve, shkëmbimi i çelësave kriptografikë, autentikimi i serverit dhe krijimi i një kanali të sigurt komunikimi.
+Implementimi realizohet përmes dy aplikacioneve console:
 
-# Implementimi i Protokollit SSH Handshake — Modeli Klient/Server
+ - SSH Client që fillon lidhjen dhe verifikon identitetin e serverit,
+ - SSH Server që simulon sjelljen e një serveri SSH gjatë procesit të handshake.
 
-**Autore:** Arbena Musa  
-**Data:** 4 Maj 2026  
-**Lënda:** Siguria e Rrjeteve / Kriptografi
-
----
-
-## Përshkrim i Përgjithshëm
-
-Ky projekt implementon një version të thjeshtuar të **protokollit SSH (Secure Shell) Handshake** ndërmjet një klienti dhe serveri në konsole. Simulon fazat fillestare të një sesioni SSH, duke përfshirë negociimin e algoritmeve, shkëmbimin e çelësave Diffie-Hellman, autentifikimin e serverit me nënshkrime dixhitale, dhe transmetimin e mesazheve të enkriptuara me AES-256 dhe HMAC-SHA256.
+Programi i lejon përdoruesit të iniciojë një lidhje të sigurt ndërmjet klientit dhe serverit, duke demonstruar në praktikë të gjitha fazat kryesore të krijimit të një sesioni të sigurt SSH. Gjatë ekzekutimit, aplikacioni shfaq mesazhe informative dhe logje të detajuara për secilin hap të handshake process, duke ndihmuar përdoruesin të kuptojë mënyrën e funksionimit të protokolleve të sigurta të komunikimit në rrjete kompjuterike.
 
 ---
 
