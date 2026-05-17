@@ -27,3 +27,16 @@ def sign_data(private_key, data):
         ),
         hashes.SHA256()
     )
+def verify_signature(public_pem, signature, data):
+    try:
+        public_key = serialization.load_pem_public_key(public_pem)
+        public_key.verify(
+            signature,
+            data,
+            padding.PSS(
+                mgf=padding.MGF1(hashes.SHA256()),
+                salt_length=padding.PSS.MAX_LENGTH
+            ),
+            hashes.SHA256()
+        )
+        return True
